@@ -1,0 +1,322 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduPredict AI | Student Performance Prediction</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <aside class="sidebar">
+        <div class="logo">
+            <div class="logo-icon">E</div>
+            <div>
+                <h2>EduPredict <span>AI</span></h2>
+                <small>STUDENT ANALYTICS</small>
+            </div>
+        </div>
+
+        <div class="menu-title">MAIN MENU</div>
+
+        <nav>
+            <a href="#" class="active">▦ Dashboard</a>
+            <a href="#prediction">◈ Performance Prediction</a>
+            <a href="#analytics">▤ Analytics</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="status-dot"></div>
+            <span>AI Model Online</span>
+        </div>
+    </aside>
+
+
+    <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">EDUCATION INTELLIGENCE PLATFORM</p>
+                <h1>Student Performance Dashboard</h1>
+                <p class="subtitle">
+                    Predict academic performance using machine learning.
+                </p>
+            </div>
+
+            <div class="top-status">
+                <span class="status-dot"></span>
+                System Active
+            </div>
+        </header>
+
+
+        <section class="stats-grid">
+
+            <div class="stat-card">
+                <p>Total Students</p>
+                <h2>{{ metrics.total_students }}</h2>
+                <small>UCI dataset records</small>
+            </div>
+
+            <div class="stat-card">
+                <p>Model R² Score</p>
+                <h2>{{ "%.3f"|format(metrics.r2) }}</h2>
+                <small>Test-set performance</small>
+            </div>
+
+            <div class="stat-card">
+                <p>Mean Absolute Error</p>
+                <h2>{{ "%.2f"|format(metrics.mae) }}</h2>
+                <small>Grade points</small>
+            </div>
+
+            <div class="stat-card">
+                <p>RMSE</p>
+                <h2>{{ "%.2f"|format(metrics.rmse) }}</h2>
+                <small>Grade points</small>
+            </div>
+
+        </section>
+
+
+        <section class="content-grid" id="prediction">
+
+            <div class="panel prediction-panel">
+
+                <div class="panel-heading">
+                    <div>
+                        <p class="eyebrow">MACHINE LEARNING ENGINE</p>
+                        <h2>Predict Student Performance</h2>
+                        <p>Enter the student's academic and personal details.</p>
+                    </div>
+                    <div class="ai-icon">✦</div>
+                </div>
+
+
+                <form id="prediction-form">
+
+                    <h3 class="form-section-title">Academic Information</h3>
+
+                    <div class="form-grid">
+
+                        <div class="field">
+                            <label>Age</label>
+                            <input type="number" name="age"
+                                min="15" max="22" value="17" required>
+                        </div>
+
+                        <div class="field">
+                            <label>Study Time</label>
+                            <select name="studytime" required>
+                                <option value="1">Less than 2 hours</option>
+                                <option value="2" selected>2 to 5 hours</option>
+                                <option value="3">5 to 10 hours</option>
+                                <option value="4">More than 10 hours</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label>Past Class Failures</label>
+                            <input type="number" name="failures"
+                                min="0" max="4" value="0" required>
+                        </div>
+
+                        <div class="field">
+                            <label>School Absences</label>
+                            <input type="number" name="absences"
+                                min="0" max="93" value="2" required>
+                        </div>
+
+                        <div class="field">
+                            <label>First Period Grade (G1)</label>
+                            <input type="number" name="G1"
+                                min="0" max="20" value="12" required>
+                        </div>
+
+                        <div class="field">
+                            <label>Second Period Grade (G2)</label>
+                            <input type="number" name="G2"
+                                min="0" max="20" value="13" required>
+                        </div>
+
+                    </div>
+
+
+                    <h3 class="form-section-title">Lifestyle Information</h3>
+
+                    <div class="form-grid">
+
+                        <div class="field">
+                            <label>Going Out (1–5)</label>
+                            <select name="goout">
+                                <option value="1">1 - Very low</option>
+                                <option value="2">2</option>
+                                <option value="3" selected>3 - Average</option>
+                                <option value="4">4</option>
+                                <option value="5">5 - Very high</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label>Health (1–5)</label>
+                            <select name="health">
+                                <option value="1">1 - Very bad</option>
+                                <option value="2">2</option>
+                                <option value="3" selected>3 - Average</option>
+                                <option value="4">4</option>
+                                <option value="5">5 - Very good</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label>Free Time (1–5)</label>
+                            <select name="freetime">
+                                <option value="1">1 - Very low</option>
+                                <option value="2">2</option>
+                                <option value="3" selected>3 - Average</option>
+                                <option value="4">4</option>
+                                <option value="5">5 - Very high</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+
+                    <h3 class="form-section-title">Student Support</h3>
+
+                    <div class="form-grid">
+
+                        <div class="field">
+                            <label>Extra School Support</label>
+                            <select name="schoolsup">
+                                <option value="yes">Yes</option>
+                                <option value="no" selected>No</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label>Family Support</label>
+                            <select name="famsup">
+                                <option value="yes" selected>Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label>Paid Extra Classes</label>
+                            <select name="paid">
+                                <option value="yes">Yes</option>
+                                <option value="no" selected>No</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label>Extra Activities</label>
+                            <select name="activities">
+                                <option value="yes" selected>Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label>Internet Access</label>
+                            <select name="internet">
+                                <option value="yes" selected>Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label>Higher Education Plans</label>
+                            <select name="higher">
+                                <option value="yes" selected>Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+
+                    <button type="submit" id="predict-btn">
+                        ✦ Predict Final Grade
+                    </button>
+
+                    <p class="form-note">
+                        Prediction is based on the trained Random Forest model.
+                    </p>
+
+                </form>
+
+            </div>
+
+
+            <div class="right-column">
+
+                <div class="panel result-panel">
+                    <p class="eyebrow">AI PREDICTION RESULT</p>
+                    <h2>Performance Overview</h2>
+
+                    <div id="result-placeholder">
+                        <div class="result-symbol">✦</div>
+                        <h3>Awaiting Student Data</h3>
+                        <p>Submit the student details to generate a prediction.</p>
+                    </div>
+
+                    <div id="result-content" class="hidden">
+                        <div class="grade-circle">
+                            <span id="predicted-grade">0.00</span>
+                            <small>/ 20</small>
+                        </div>
+
+                        <h3 id="performance-category">Good</h3>
+                        <p id="prediction-message"></p>
+
+                        <div class="result-scale">
+                            <div id="grade-bar"></div>
+                        </div>
+                    </div>
+
+                    <div id="error-message" class="error-message hidden"></div>
+                </div>
+
+
+                <div class="panel analytics-panel" id="analytics">
+                    <p class="eyebrow">DATASET INSIGHTS</p>
+                    <h2>Grade Distribution</h2>
+                    <p class="chart-description">
+                        Students grouped by final grade (G3).
+                    </p>
+
+                    <canvas id="gradeChart"></canvas>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <footer>
+            EduPredict AI · Student Performance Prediction System
+            <span>Powered by Random Forest Machine Learning</span>
+        </footer>
+
+    </main>
+
+</div>
+
+
+<script>
+    const gradeDistribution =
+        {{ metrics.grade_distribution | tojson }};
+</script>
+
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+
+</body>
+</html>

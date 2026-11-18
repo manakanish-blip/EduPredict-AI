@@ -1,0 +1,14 @@
+{
+    "mae": 1.048,
+    "rmse": 1.717,
+    "r2": 0.8562,
+    "total_students": 395,
+    "training_students": 316,
+    "testing_students": 79,
+    "grade_distribution": {
+        "0-5": 46,
+        "6-10": 140,
+        "11-15": 169,
+        "16-20": 40
+    }
+}
