@@ -4,9 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduPredict AI | Student Performance Prediction</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>EduPredict AI | Student Performance Analytics</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
@@ -14,9 +17,13 @@
 
 <div class="dashboard">
 
+    <!-- SIDEBAR -->
+
     <aside class="sidebar">
+
         <div class="logo">
             <div class="logo-icon">E</div>
+
             <div>
                 <h2>EduPredict <span>AI</span></h2>
                 <small>STUDENT ANALYTICS</small>
@@ -27,25 +34,35 @@
 
         <nav>
             <a href="#" class="active">▦ Dashboard</a>
-            <a href="#prediction">◈ Performance Prediction</a>
-            <a href="#analytics">▤ Analytics</a>
+            <a href="#prediction">◈ Score Prediction</a>
+            <a href="#analysis">▤ Improvement Analysis</a>
+            <a href="#analytics">▥ Analytics</a>
         </nav>
 
         <div class="sidebar-bottom">
             <div class="status-dot"></div>
-            <span>AI Model Online</span>
+            <span>AI Models Online</span>
         </div>
+
     </aside>
 
+
+    <!-- MAIN CONTENT -->
 
     <main class="main-content">
 
         <header class="topbar">
+
             <div>
-                <p class="eyebrow">EDUCATION INTELLIGENCE PLATFORM</p>
+                <p class="eyebrow">
+                    EDUCATION INTELLIGENCE PLATFORM
+                </p>
+
                 <h1>Student Performance Dashboard</h1>
+
                 <p class="subtitle">
-                    Predict academic performance using machine learning.
+                    Predict academic performance and discover
+                    opportunities for improvement.
                 </p>
             </div>
 
@@ -53,8 +70,11 @@
                 <span class="status-dot"></span>
                 System Active
             </div>
+
         </header>
 
+
+        <!-- STATISTICS -->
 
         <section class="stats-grid">
 
@@ -65,176 +85,350 @@
             </div>
 
             <div class="stat-card">
-                <p>Model R² Score</p>
-                <h2>{{ "%.3f"|format(metrics.r2) }}</h2>
+                <p>With Grades Model R²</p>
+                <h2>{{ "%.3f"|format(metrics.models.with_grades.r2) }}</h2>
                 <small>Test-set performance</small>
             </div>
 
             <div class="stat-card">
-                <p>Mean Absolute Error</p>
-                <h2>{{ "%.2f"|format(metrics.mae) }}</h2>
-                <small>Grade points</small>
+                <p>Without Grades Model R²</p>
+                <h2>{{ "%.3f"|format(metrics.models.without_grades.r2) }}</h2>
+                <small>Test-set performance</small>
             </div>
 
             <div class="stat-card">
-                <p>RMSE</p>
-                <h2>{{ "%.2f"|format(metrics.rmse) }}</h2>
-                <small>Grade points</small>
+                <p>Prediction Models</p>
+                <h2>02</h2>
+                <small>Random Forest models</small>
             </div>
 
         </section>
 
 
+        <!-- MAIN GRID -->
+
         <section class="content-grid" id="prediction">
+
+            <!-- STUDENT FORM -->
 
             <div class="panel prediction-panel">
 
                 <div class="panel-heading">
+
                     <div>
-                        <p class="eyebrow">MACHINE LEARNING ENGINE</p>
+                        <p class="eyebrow">
+                            MACHINE LEARNING ENGINE
+                        </p>
+
                         <h2>Predict Student Performance</h2>
-                        <p>Enter the student's academic and personal details.</p>
+
+                        <p>
+                            Enter student details for personalized
+                            academic analysis.
+                        </p>
                     </div>
+
                     <div class="ai-icon">✦</div>
+
                 </div>
 
 
                 <form id="prediction-form">
 
-                    <h3 class="form-section-title">Academic Information</h3>
+                    <!-- PREDICTION MODE -->
+
+                    <h3 class="form-section-title">
+                        Prediction Method
+                    </h3>
+
+                    <div class="field">
+
+                        <label for="prediction-mode">
+                            Select Prediction Mode
+                        </label>
+
+                        <select
+                            name="prediction_mode"
+                            id="prediction-mode"
+                            required
+                        >
+
+                            <option value="with_grades" selected>
+                                With Previous Grades (G1 and G2)
+                            </option>
+
+                            <option value="without_grades">
+                                Without Previous Grades
+                            </option>
+
+                        </select>
+
+                        <small>
+                            Choose whether previous academic grades
+                            should be used for prediction.
+                        </small>
+
+                    </div>
+
+
+                    <!-- ACADEMIC INFORMATION -->
+
+                    <h3 class="form-section-title">
+                        Academic Information
+                    </h3>
 
                     <div class="form-grid">
 
                         <div class="field">
+
                             <label>Age</label>
-                            <input type="number" name="age"
-                                min="15" max="22" value="17" required>
+
+                            <input
+                                type="number"
+                                name="age"
+                                min="15"
+                                max="22"
+                                value="17"
+                                required
+                            >
+
                         </div>
 
+
                         <div class="field">
+
                             <label>Study Time</label>
+
                             <select name="studytime" required>
-                                <option value="1">Less than 2 hours</option>
-                                <option value="2" selected>2 to 5 hours</option>
-                                <option value="3">5 to 10 hours</option>
-                                <option value="4">More than 10 hours</option>
+
+                                <option value="1">
+                                    Less than 2 hours
+                                </option>
+
+                                <option value="2" selected>
+                                    2 to 5 hours
+                                </option>
+
+                                <option value="3">
+                                    5 to 10 hours
+                                </option>
+
+                                <option value="4">
+                                    More than 10 hours
+                                </option>
+
                             </select>
+
                         </div>
 
+
                         <div class="field">
+
                             <label>Past Class Failures</label>
-                            <input type="number" name="failures"
-                                min="0" max="4" value="0" required>
+
+                            <input
+                                type="number"
+                                name="failures"
+                                min="0"
+                                max="4"
+                                value="0"
+                                required
+                            >
+
                         </div>
 
+
                         <div class="field">
+
                             <label>School Absences</label>
-                            <input type="number" name="absences"
-                                min="0" max="93" value="2" required>
-                        </div>
 
-                        <div class="field">
-                            <label>First Period Grade (G1)</label>
-                            <input type="number" name="G1"
-                                min="0" max="20" value="12" required>
-                        </div>
+                            <input
+                                type="number"
+                                name="absences"
+                                min="0"
+                                max="93"
+                                value="2"
+                                required
+                            >
 
-                        <div class="field">
-                            <label>Second Period Grade (G2)</label>
-                            <input type="number" name="G2"
-                                min="0" max="20" value="13" required>
                         </div>
 
                     </div>
 
 
-                    <h3 class="form-section-title">Lifestyle Information</h3>
+                    <!-- PREVIOUS GRADES -->
+
+                    <div id="grade-fields">
+
+                        <h3 class="form-section-title">
+                            Previous Academic Grades
+                        </h3>
+
+                        <div class="form-grid">
+
+                            <div class="field">
+
+                                <label>First Period Grade (G1)</label>
+
+                                <input
+                                    type="number"
+                                    name="G1"
+                                    min="0"
+                                    max="20"
+                                    value="12"
+                                >
+
+                            </div>
+
+
+                            <div class="field">
+
+                                <label>Second Period Grade (G2)</label>
+
+                                <input
+                                    type="number"
+                                    name="G2"
+                                    min="0"
+                                    max="20"
+                                    value="13"
+                                >
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- LIFESTYLE -->
+
+                    <h3 class="form-section-title">
+                        Lifestyle Information
+                    </h3>
 
                     <div class="form-grid">
 
                         <div class="field">
+
                             <label>Going Out (1–5)</label>
-                            <select name="goout">
+
+                            <select name="goout" required>
+
                                 <option value="1">1 - Very low</option>
                                 <option value="2">2</option>
-                                <option value="3" selected>3 - Average</option>
+                                <option value="3" selected>
+                                    3 - Average
+                                </option>
                                 <option value="4">4</option>
                                 <option value="5">5 - Very high</option>
+
                             </select>
+
                         </div>
 
+
                         <div class="field">
+
                             <label>Health (1–5)</label>
-                            <select name="health">
+
+                            <select name="health" required>
+
                                 <option value="1">1 - Very bad</option>
                                 <option value="2">2</option>
-                                <option value="3" selected>3 - Average</option>
+                                <option value="3" selected>
+                                    3 - Average
+                                </option>
                                 <option value="4">4</option>
                                 <option value="5">5 - Very good</option>
+
                             </select>
+
                         </div>
 
+
                         <div class="field">
+
                             <label>Free Time (1–5)</label>
-                            <select name="freetime">
+
+                            <select name="freetime" required>
+
                                 <option value="1">1 - Very low</option>
                                 <option value="2">2</option>
-                                <option value="3" selected>3 - Average</option>
+                                <option value="3" selected>
+                                    3 - Average
+                                </option>
                                 <option value="4">4</option>
                                 <option value="5">5 - Very high</option>
+
                             </select>
+
                         </div>
 
                     </div>
 
 
-                    <h3 class="form-section-title">Student Support</h3>
+                    <!-- STUDENT SUPPORT -->
+
+                    <h3 class="form-section-title">
+                        Student Support
+                    </h3>
 
                     <div class="form-grid">
 
                         <div class="field">
                             <label>Extra School Support</label>
-                            <select name="schoolsup">
+
+                            <select name="schoolsup" required>
                                 <option value="yes">Yes</option>
                                 <option value="no" selected>No</option>
                             </select>
                         </div>
+
 
                         <div class="field">
                             <label>Family Support</label>
-                            <select name="famsup">
+
+                            <select name="famsup" required>
                                 <option value="yes" selected>Yes</option>
                                 <option value="no">No</option>
                             </select>
                         </div>
 
+
                         <div class="field">
                             <label>Paid Extra Classes</label>
-                            <select name="paid">
+
+                            <select name="paid" required>
                                 <option value="yes">Yes</option>
                                 <option value="no" selected>No</option>
                             </select>
                         </div>
 
+
                         <div class="field">
                             <label>Extra Activities</label>
-                            <select name="activities">
+
+                            <select name="activities" required>
                                 <option value="yes" selected>Yes</option>
                                 <option value="no">No</option>
                             </select>
                         </div>
+
 
                         <div class="field">
                             <label>Internet Access</label>
-                            <select name="internet">
+
+                            <select name="internet" required>
                                 <option value="yes" selected>Yes</option>
                                 <option value="no">No</option>
                             </select>
                         </div>
 
+
                         <div class="field">
                             <label>Higher Education Plans</label>
-                            <select name="higher">
+
+                            <select name="higher" required>
                                 <option value="yes" selected>Yes</option>
                                 <option value="no">No</option>
                             </select>
@@ -244,11 +438,12 @@
 
 
                     <button type="submit" id="predict-btn">
-                        ✦ Predict Final Grade
+                        ✦ Predict and Analyze Performance
                     </button>
 
                     <p class="form-note">
-                        Prediction is based on the trained Random Forest model.
+                        Predictions are generated using trained
+                        Random Forest regression models.
                     </p>
 
                 </form>
@@ -256,44 +451,207 @@
             </div>
 
 
+            <!-- RESULTS COLUMN -->
+
             <div class="right-column">
 
+
+                <!-- PREDICTION RESULT -->
+
                 <div class="panel result-panel">
-                    <p class="eyebrow">AI PREDICTION RESULT</p>
+
+                    <p class="eyebrow">
+                        AI PREDICTION RESULT
+                    </p>
+
                     <h2>Performance Overview</h2>
 
+
                     <div id="result-placeholder">
+
                         <div class="result-symbol">✦</div>
+
                         <h3>Awaiting Student Data</h3>
-                        <p>Submit the student details to generate a prediction.</p>
+
+                        <p>
+                            Submit student details to generate
+                            a score prediction and analysis.
+                        </p>
+
                     </div>
 
+
                     <div id="result-content" class="hidden">
+
                         <div class="grade-circle">
+
                             <span id="predicted-grade">0.00</span>
+
                             <small>/ 20</small>
+
                         </div>
 
-                        <h3 id="performance-category">Good</h3>
+                        <h3 id="performance-category">
+                            Good
+                        </h3>
+
                         <p id="prediction-message"></p>
 
                         <div class="result-scale">
                             <div id="grade-bar"></div>
                         </div>
+
+                        <p id="selected-model"></p>
+
                     </div>
 
-                    <div id="error-message" class="error-message hidden"></div>
+
+                    <div id="error-message"
+                         class="error-message hidden">
+                    </div>
+
                 </div>
 
 
-                <div class="panel analytics-panel" id="analytics">
-                    <p class="eyebrow">DATASET INSIGHTS</p>
-                    <h2>Grade Distribution</h2>
+                <!-- MODEL METRICS -->
+
+                <div class="panel">
+
+                    <p class="eyebrow">
+                        MODEL PERFORMANCE
+                    </p>
+
+                    <h2>Prediction Metrics</h2>
+
+                    <div class="form-grid">
+
+                        <div class="stat-card">
+                            <p>MAE</p>
+                            <h2 id="model-mae">--</h2>
+                        </div>
+
+                        <div class="stat-card">
+                            <p>RMSE</p>
+                            <h2 id="model-rmse">--</h2>
+                        </div>
+
+                        <div class="stat-card">
+                            <p>R² Score</p>
+                            <h2 id="model-r2">--</h2>
+                        </div>
+
+                    </div>
+
                     <p class="chart-description">
-                        Students grouped by final grade (G3).
+                        Metrics update according to the selected
+                        prediction model.
+                    </p>
+
+                </div>
+
+
+                <!-- IMPROVEMENT ANALYSIS -->
+
+                <div class="panel" id="analysis">
+
+                    <p class="eyebrow">
+                        PERSONALIZED STUDENT ANALYSIS
+                    </p>
+
+                    <h2>Areas for Improvement</h2>
+
+                    <div id="recommendations-placeholder">
+
+                        <div class="result-symbol">◎</div>
+
+                        <h3>Analysis Not Available Yet</h3>
+
+                        <p>
+                            Submit student details to discover
+                            possible areas for improvement.
+                        </p>
+
+                    </div>
+
+
+                    <div id="recommendations-content"
+                         class="hidden">
+
+                        <div id="recommendation-list"></div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- STRENGTHS -->
+
+                <div class="panel">
+
+                    <p class="eyebrow">
+                        POSITIVE INDICATORS
+                    </p>
+
+                    <h2>Student Strengths</h2>
+
+                    <div id="strengths-placeholder">
+
+                        <p>
+                            Student strengths will appear
+                            after the analysis.
+                        </p>
+
+                    </div>
+
+                    <div id="strengths-content" class="hidden">
+
+                        <ul id="strength-list"></ul>
+
+                    </div>
+
+                </div>
+
+
+                <!-- IMPROVEMENT PLAN -->
+
+                <div class="panel">
+
+                    <p class="eyebrow">
+                        ACTIONABLE GUIDANCE
+                    </p>
+
+                    <h2>Improvement Action Plan</h2>
+
+                    <div id="action-plan">
+
+                        <p>
+                            Your personalized action plan will
+                            appear after prediction.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DATASET ANALYTICS -->
+
+                <div class="panel analytics-panel"
+                     id="analytics">
+
+                    <p class="eyebrow">
+                        DATASET INSIGHTS
+                    </p>
+
+                    <h2>Grade Distribution</h2>
+
+                    <p class="chart-description">
+                        Students grouped by final mathematics
+                        grade (G3).
                     </p>
 
                     <canvas id="gradeChart"></canvas>
+
                 </div>
 
             </div>
@@ -302,8 +660,14 @@
 
 
         <footer>
-            EduPredict AI · Student Performance Prediction System
-            <span>Powered by Random Forest Machine Learning</span>
+
+            EduPredict AI · Student Performance
+            Prediction and Recommendation System
+
+            <span>
+                Powered by Random Forest Machine Learning
+            </span>
+
         </footer>
 
     </main>
@@ -311,10 +675,15 @@
 </div>
 
 
+<!-- CHART DATA -->
+
 <script>
     const gradeDistribution =
         {{ metrics.grade_distribution | tojson }};
 </script>
+
+
+<!-- JAVASCRIPT -->
 
 <script src="{{ url_for('static', filename='app.js') }}"></script>
 

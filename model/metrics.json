@@ -1,7 +1,4 @@
 {
-    "mae": 1.048,
-    "rmse": 1.717,
-    "r2": 0.8562,
     "total_students": 395,
     "training_students": 316,
     "testing_students": 79,
@@ -10,5 +7,103 @@
         "6-10": 140,
         "11-15": 169,
         "16-20": 40
+    },
+    "models": {
+        "with_grades": {
+            "model_path": "student_model_with_grades.pkl",
+            "mae": 1.048,
+            "rmse": 1.717,
+            "r2": 0.8562,
+            "top_features": [
+                {
+                    "feature": "num__G2",
+                    "importance": 0.79457
+                },
+                {
+                    "feature": "num__absences",
+                    "importance": 0.11886
+                },
+                {
+                    "feature": "num__age",
+                    "importance": 0.02389
+                },
+                {
+                    "feature": "num__health",
+                    "importance": 0.01433
+                },
+                {
+                    "feature": "num__G1",
+                    "importance": 0.01113
+                },
+                {
+                    "feature": "num__goout",
+                    "importance": 0.00787
+                },
+                {
+                    "feature": "num__studytime",
+                    "importance": 0.00449
+                },
+                {
+                    "feature": "num__freetime",
+                    "importance": 0.00369
+                },
+                {
+                    "feature": "num__failures",
+                    "importance": 0.00367
+                },
+                {
+                    "feature": "cat__schoolsup_yes",
+                    "importance": 0.00354
+                }
+            ]
+        },
+        "without_grades": {
+            "model_path": "student_model_without_grades.pkl",
+            "mae": 3.333,
+            "rmse": 3.937,
+            "r2": 0.2441,
+            "top_features": [
+                {
+                    "feature": "num__absences",
+                    "importance": 0.23846
+                },
+                {
+                    "feature": "num__failures",
+                    "importance": 0.16421
+                },
+                {
+                    "feature": "num__health",
+                    "importance": 0.1117
+                },
+                {
+                    "feature": "num__goout",
+                    "importance": 0.09454
+                },
+                {
+                    "feature": "num__age",
+                    "importance": 0.0879
+                },
+                {
+                    "feature": "num__freetime",
+                    "importance": 0.06678
+                },
+                {
+                    "feature": "num__studytime",
+                    "importance": 0.0605
+                },
+                {
+                    "feature": "cat__schoolsup_no",
+                    "importance": 0.01923
+                },
+                {
+                    "feature": "cat__schoolsup_yes",
+                    "importance": 0.01897
+                },
+                {
+                    "feature": "cat__activities_no",
+                    "importance": 0.01751
+                }
+            ]
+        }
     }
 }
